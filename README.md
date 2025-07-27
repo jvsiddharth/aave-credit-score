@@ -16,3 +16,6 @@ Computes wallet-level features: number of transactions, active days, average tra
 Risk Scoring:
 Calculates a raw score using a weighted combination of features (repay ratio: 35%, borrow-to-deposit ratio: 25%, liquidation count: 20%, transaction frequency: 15%, asset diversification: 5%).
 Scales raw scores to a 0-1000 range using MinMaxScaler.
+
+run command: 
+ python src/credit.py --input data/user-wallet-transactions.json --wallets data/wallets.csv --output wallet_scores.csv 
