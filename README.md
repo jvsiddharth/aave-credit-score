@@ -1,21 +1,18 @@
-# Aave V2 DeFi Credit Scorer
+# Aave V2 Wallet Credit Scoring
 
-## 📌 Problem
+## 📌 Problem Statement
 
-Build a machine learning system to generate credit scores (0–1000) for wallets on the Aave V2 protocol using historical transaction behavior only.
 
-## 🔍 Dataset
+Methodology
 
-- Format: JSON (~87 MB unzipped)
-- Records: ~100,000+ transactions
-- Link: [user-transactions.json](https://drive.google.com/file/d/1ISFbAXxadMrt7Zl96rmzzZmEKZnyW7FS/view?usp=sharing)
+Data Collection:
+Loads transaction data from user_transactions.json.
+Filters transactions to include only wallets listed in wallet_addresses.csv.
+Converts transaction amounts to USD values, handling token decimals.
 
-## ⚙️ Project Structure
+Feature Extraction:
+Computes wallet-level features: number of transactions, active days, average transaction USD value, total deposits, borrows, repays, liquidation count, borrow-to-deposit ratio, repay ratio, and unique assets used.
 
-```bash
-project/
-│
-├── score_generator.ipynb     # Jupyter notebook containing all code and logic
-├── wallet_scores.csv         # Output CSV with wallet address and score
-├── analysis.md               # Summary of methods and insights
-└── README.md                 # This file
+Risk Scoring:
+Calculates a raw score using a weighted combination of features (repay ratio: 35%, borrow-to-deposit ratio: 25%, liquidation count: 20%, transaction frequency: 15%, asset diversification: 5%).
+Scales raw scores to a 0-1000 range using MinMaxScaler.
